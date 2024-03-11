@@ -1,11 +1,15 @@
-import React from 'react';
-import Router from './router/Router';
+import React from "react";
+import Router from "./router/Router";
+import { ScoreContextProvider } from "./store/ContextAPI";
+
 
 function App(): JSX.Element {
   return (
-    <div className="App">
-      <Router />
-    </div>
+    <ScoreContextProvider>
+      <div className="App">
+        <Router />
+      </div>
+    </ScoreContextProvider>
   );
 }
 

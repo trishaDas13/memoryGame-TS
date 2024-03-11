@@ -3,6 +3,7 @@ import './card.scss'; // Import SCSS file
 import { combinedCardsArray } from "./Data";
 import pinkCard from '../../assets/cardback.png';
 import blueCard from '../../assets/bluecard.png';
+import { useNavigate } from 'react-router-dom';
 
 interface CardProps {
   score: number;
@@ -22,6 +23,8 @@ const Card: React.FC<CardProps> = ({score, setScore}) => {
   const [clickedBlueCard, setClickedBlueCard] = useState<string | null>(null);
   const [pinkCardClicked, setPinkCardClicked] = useState<boolean>(false);
   const [matchedCards, setMatchedCards] = useState<string[]>([]);
+  const[moves, setmoves] = useState<number>(0);
+  const navigate = useNavigate();
 
   const shuffleCards = (array: CardItem[]) => {
     if (!Array.isArray(array)) {
@@ -57,6 +60,7 @@ const Card: React.FC<CardProps> = ({score, setScore}) => {
       setClickedBlueCard(id);
       const pinkCardId = clickedPinkCard;
       const blueCardId = id;
+      setmoves(moves+1);
       if (pinkCardId === blueCardId) {
         setScore(score + 1);
         
@@ -65,6 +69,7 @@ const Card: React.FC<CardProps> = ({score, setScore}) => {
         }, 1000); 
       } else {
         setTimeout(() => {
+          
           setClickedPinkCard(null);
           setClickedBlueCard(null);
         }, 1000); // Delay before flipping back
@@ -73,7 +78,15 @@ const Card: React.FC<CardProps> = ({score, setScore}) => {
     }
   };
 
+  useEffect(() => {
+    if(moves === 5){
+      navigate('/result')
+    }
+  })
+
   return (
+    <>
+    <div className="moves">move: {moves}</div>
     <div className="card-game">
       <div className="cards_grid">
         {pinkCards.map((item) => (
@@ -100,6 +113,7 @@ const Card: React.FC<CardProps> = ({score, setScore}) => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 
