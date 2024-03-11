@@ -23,7 +23,7 @@ const Card: React.FC<CardProps> = ({score, setScore}) => {
   const [clickedBlueCard, setClickedBlueCard] = useState<string | null>(null);
   const [pinkCardClicked, setPinkCardClicked] = useState<boolean>(false);
   const [matchedCards, setMatchedCards] = useState<string[]>([]);
-  const[moves, setmoves] = useState<number>(0);
+  // const[moves, setmoves] = useState<number>(0);
   const navigate = useNavigate();
 
   const shuffleCards = (array: CardItem[]) => {
@@ -60,7 +60,7 @@ const Card: React.FC<CardProps> = ({score, setScore}) => {
       setClickedBlueCard(id);
       const pinkCardId = clickedPinkCard;
       const blueCardId = id;
-      setmoves(moves+1);
+      // setmoves(moves+1);
       if (pinkCardId === blueCardId) {
         setScore(score + 1);
         
@@ -78,15 +78,15 @@ const Card: React.FC<CardProps> = ({score, setScore}) => {
     }
   };
 
-  useEffect(() => {
-    if(moves === 5){
-      navigate('/result')
-    }
-  })
+  // useEffect(() => {
+  //   if(moves === 5){
+  //     navigate('/result')
+  //   }
+  // })
 
   return (
     <>
-    <div className="moves">move: {moves}</div>
+    {/* <div className="moves">move: {moves}</div> */}
     <div className="card-game">
       <div className="cards_grid">
         {pinkCards.map((item) => (
